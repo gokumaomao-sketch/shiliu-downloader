@@ -54,7 +54,7 @@ A macOS tool for local file downloads, web video detection and desktop task mana
 
 ## macOS installation
 
-Target: macOS 12+, Apple Silicon arm64. The current build was tested on macOS 26.5.2; Intel packages are not validated. V2.1.2 binary release remains Draft.
+Target: macOS 26.0+, Apple Silicon arm64. The current build was tested on macOS 26.5.2; The bundled Python.framework has an actual minimum OS of 26.0; older macOS compatibility is not claimed. Intel packages are not validated. V2.1.2 binary release remains Draft.
 
 There is no officially released installer yet. This README does not instruct users to disable Gatekeeper or bypass macOS warnings. Developers may run source or follow [build instructions](docs/构建说明.md).
 

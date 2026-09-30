@@ -36,3 +36,7 @@ FFmpeg 作为独立命令行进程使用；FFmpeg 自身静态包含其 LGPL 内
 `third_party_licenses/upstream-MIT.txt` 保留原源码作者 Bayoumi 的版权许可，不代表拾流整体的根目录 LICENSE。Python 包各自许可随 PyInstaller 收集的发行包元数据保留。App 中另附实际运行依赖的许可清单。
 
 PyInstaller 的 ad-hoc 重签可能改变 Mach-O 文件字节。上述为打包前 SHA256；最终包内 SHA256 必须另列在 Release 目录的 `THIRD_PARTY_BINARY_PROVENANCE.md`，不得混为一谈。免费再分发边界不等于已取得 Apple 公证。
+
+## App 实际系统要求
+
+内置 Python 3.14.7 框架的 LC_BUILD_VERSION minos 为 26.0；当前本地 App 实际面向 macOS 26.0+ arm64。FFmpeg 自身的 12.0 部署目标不代表整套 App 支持 macOS 12。App plist 与 README 已同步真实要求，未改变 Python 技术栈或升级依赖。Python PSF 及 Tcl/Tk 许可全文随源码和 App 保留。

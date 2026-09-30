@@ -80,7 +80,7 @@ app = BUNDLE(
         "CFBundleDisplayName": "拾流下载器",
         "CFBundleShortVersionString": "2.1.2",
         "CFBundleVersion": "2.1.2",
-        "LSMinimumSystemVersion": "12.0",
+        "LSMinimumSystemVersion": "26.0",
         "LSApplicationCategoryType": "public.app-category.utilities",
         "NSHighResolutionCapable": True,
     },

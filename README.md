@@ -56,7 +56,7 @@
 
 ## macOS 安装方式
 
-当前验证平台：macOS 12+、Apple Silicon（arm64）；实际构建环境 macOS 26.5.2。Intel 安装包未验证。
+当前验证平台：macOS 26.0+、Apple Silicon（arm64）；实际构建环境 macOS 26.5.2。内置 Python.framework 的实际 minos 为 26.0，不能据旧 plist 宣称兼容 macOS 12；Intel 安装包未验证。
 
 V2.1.2 二进制 Release 暂为 Draft。普通用户安装包尚未正式发布，不提供关闭 Gatekeeper 或绕过系统安全提示的操作。开发者可运行源码或按 [构建说明](docs/构建说明.md) 自行构建用于本地验证。
 

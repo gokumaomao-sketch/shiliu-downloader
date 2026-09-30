@@ -8,7 +8,7 @@
 
 ## 文件与安装
 
-仅面向 macOS 12+ Apple Silicon arm64；Intel 未验证。正式签名/公证通过并发布后，ZIP 解压得到 App，DMG 挂载将 App 拖入 Applications。当前这些文件不作为公开安装包提供。
+仅面向 macOS 26.0+ Apple Silicon arm64；Intel 未验证。正式签名/公证通过并发布后，ZIP 解压得到 App，DMG 挂载将 App 拖入 Applications。当前这些文件不作为公开安装包提供。
 
 Chrome 扩展需加载 App 内 Contents/Resources/browser_extension 或源码同名目录，更新后重载并刷新网页。桌面端监听本机 7374。
 
