@@ -39,16 +39,16 @@ A macOS tool for local file downloads, web video detection and desktop task mana
 
 - HTTP/HTTPS files, multiple connections, pause/resume, stop and delete.
 - Task categories, search, progress, speed, open files and folders.
-- Chrome video detection and download requests; optional download interception.
+- Optional Chrome video detection and download requests; the V2.1.2 Release App end-to-end path remains under validation and is not a main-app release gate.
 - HLS/DASH segments and merging, plus selected sites through yt-dlp.
 - FFmpeg/FFprobe media tools and Node.js extraction support.
-- Optional WeChat Channels integration uses a separate third-party tool and requires explicit local setup.
+- Optional WeChat Channels integration uses a separate third-party tool and requires explicit local setup. It remains under validation; current availability is not guaranteed and does not gate the main-app release.
 
 ## Quick start
 
 1. Set up Python and start the desktop app from source as below.
-2. Load the repository's `browser_extension` folder in Chrome.
-3. Keep the desktop app running on `127.0.0.1:7374`, then download content you are authorized to access.
+2. Choose Add task and enter an authorized direct HTTP/HTTPS file URL, filename and destination.
+3. Manage downloads in the desktop app. Chrome and WeChat Channels are optional; ordinary file downloads require neither.
 
 [Releases](https://github.com/gokumaomao-sketch/shiliu-downloader/releases) does not currently offer a public V2.1.2 DMG. Local test packages are not Developer ID signed or notarized.
 
@@ -58,7 +58,7 @@ Target: macOS 26.0+, Apple Silicon arm64. The current build was tested on macOS 
 
 There is no officially released installer yet. This README does not instruct users to disable Gatekeeper or bypass macOS warnings. Developers may run source or follow [build instructions](docs/构建说明.md).
 
-Once a signed public package exists, verify SHA256. ZIP extraction yields an App; a DMG provides an Applications drag-and-drop entry. The Chrome extension must be loaded separately.
+Once a signed public package exists, verify SHA256. ZIP extraction yields an App; a DMG provides an Applications drag-and-drop entry. The optional Chrome extension can be loaded separately when browser integration is needed.
 
 ## Running from source
 
@@ -82,6 +82,8 @@ node tests/test_page_player.js
 The full suite includes display-dependent tests and known stale assertions. See [verification notes](docs/验证说明.md); no build-passing badge is claimed.
 
 ## Browser extension
+
+Optional and under continued validation. A real Chrome end-to-end acceptance of the V2.1.2 Release App is still outstanding; ordinary downloads do not require this extension.
 
 1. Start the desktop app and its browser service.
 2. Open Chrome's extensions manager, enable Developer mode and choose **Load unpacked**.
