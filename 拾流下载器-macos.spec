@@ -13,6 +13,7 @@ datas = [
     ("MAC_BINARY_PROVENANCE.md", "."),
     ("logo_toolbar.png", "."),
     ("third_party_licenses", "third_party_licenses"),
+    ("third_party_sources", "third_party_sources"),
     ("third_party/wx_video_download", "third_party"),
     ("third_party/macos_arm64/bin/node", "bin"),
     ("third_party/macos_arm64/bin/ffmpeg", "bin"),
@@ -77,8 +78,8 @@ app = BUNDLE(
     info_plist={
         "CFBundleName": "拾流下载器",
         "CFBundleDisplayName": "拾流下载器",
-        "CFBundleShortVersionString": "2.1.0",
-        "CFBundleVersion": "2.1.0",
+        "CFBundleShortVersionString": "2.1.2",
+        "CFBundleVersion": "2.1.2",
         "LSMinimumSystemVersion": "12.0",
         "LSApplicationCategoryType": "public.app-category.utilities",
         "NSHighResolutionCapable": True,

@@ -467,9 +467,6 @@ chrome.downloads.onCreated.addListener(async (item) => {
 // ── message bus ─────────────────────────────────────────────────────────────
 
 chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
-  if (msg?.type === "downloadMedia" || msg?.type === "add") {
-    console.info("[拾流链路] extension_received", { type: msg.type, tabId: sender?.tab?.id ?? msg.tabId });
-  }
   if (msg?.type === "ping") {
     pingApp().then(sendResponse);
     return true;
@@ -500,7 +497,6 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
   if (msg?.type === "downloadMedia" && msg.item) {
     const tabId = msg.tabId != null ? msg.tabId : sender?.tab?.id;
     downloadMedia(msg.item, msg.sel || {}, tabId).then(sendResponse, (error) => {
-      console.error("[拾流链路] extension_failed", String(error.message || error));
       sendResponse({ ok: false, error: String(error.message || error) });
     });
     return true;
@@ -926,9 +922,7 @@ async function collectCookies(url) {
 }
 
 async function sendToApp(url, opts = {}) {
-  console.info("[拾流链路] preparing_request", { mediaType: opts.media_type || "http" });
   const cfg = await getConfig();
-  console.info("[拾流链路] extension_config", { enabled: cfg.enabled, port: cfg.port, tokenConfigured: !!cfg.token });
   if (!cfg.enabled) {
     notify("拾流下载器", "扩展已关闭，请在扩展面板中启用。");
     return { ok: false, error: "disabled" };
@@ -955,7 +949,6 @@ async function sendToApp(url, opts = {}) {
 
   try {
     const base = await apiBase();
-    console.info("[拾流链路] request_sent", { endpoint: `${base}/api/add` });
     const res = await fetch(`${base}/api/add`, {
       method: "POST",
       headers: await authHeaders(),
@@ -963,12 +956,10 @@ async function sendToApp(url, opts = {}) {
     });
     const data = await res.json().catch(() => ({}));
     if (!res.ok || data.ok === false) {
-      console.info("[拾流链路] http_response", { status: res.status, ok: data.ok, error: data.error });
       const err = readableError(data.error || `HTTP ${res.status}`);
       notify("拾流下载器", `失败：${err}。请检查桌面软件是否运行。`, "md-add-failed");
       return { ok: false, error: err };
     }
-    console.info("[拾流链路] http_response", { status: res.status, ok: data.ok, jobId: data.id, prompted: !!data.prompted });
     if (data.prompted) {
       notify("拾流下载器", `请在桌面软件中选择下载设置：${data.filename || payload.filename}`);
     } else {
@@ -977,7 +968,6 @@ async function sendToApp(url, opts = {}) {
     }
     return { ok: true, ...data };
   } catch (e) {
-    console.error("[拾流链路] request_failed", String(e.message || e));
     notifyOffline();   // throttled, single reusable toast — never a storm
     return { ok: false, error: String(e.message || e) };
   }

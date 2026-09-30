@@ -6,8 +6,6 @@ Binds only to 127.0.0.1. The Chrome/Edge extension posts download requests here.
 from __future__ import annotations
 
 import json
-from datetime import datetime
-from uuid import uuid4
 import threading
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from typing import Any, Callable
@@ -155,17 +153,6 @@ class BrowserAPIServer:
                 # Keep console quiet; errors still useful for debug if needed
                 return
 
-            def _trace(self, stage: str, **details: Any) -> None:
-                record = {"time": datetime.now().astimezone().isoformat(), "stage": stage,
-                          "request_id": getattr(self, "_trace_id", ""),
-                          "path": urlparse(self.path).path,
-                          "origin": self.headers.get("Origin", ""), **details}
-                try:
-                    with (DATA_DIR / "browser_api.log").open("a", encoding="utf-8") as log:
-                        log.write(json.dumps(record, ensure_ascii=False) + "\n")
-                except OSError:
-                    pass
-
             def _cors(self) -> None:
                 origin = self.headers.get("Origin", "")
                 # Reflect the caller's own origin instead of "*", so only the
@@ -255,9 +242,6 @@ class BrowserAPIServer:
                 return header_token == server_ref.token
 
             def _json(self, code: int, payload: dict[str, Any]) -> None:
-                if self.command == "POST":
-                    self._trace("http_response", status=code, ok=payload.get("ok"),
-                                job_id=payload.get("id"), error=payload.get("error", ""))
                 body = json.dumps(payload).encode("utf-8")
                 self.send_response(code)
                 self._cors()
@@ -308,8 +292,6 @@ class BrowserAPIServer:
                 self._json(404, {"ok": False, "error": "Not found"})
 
             def do_POST(self) -> None:  # noqa: N802
-                self._trace_id = uuid4().hex[:12]
-                self._trace("request_received", host=self.headers.get("Host", ""))
                 if self._reject_foreign_origin():
                     return
                 path = urlparse(self.path).path.rstrip("/") or "/"
@@ -372,8 +354,6 @@ class BrowserAPIServer:
 
                 try:
                     result = server_ref.on_add(data)
-                    self._trace("app_task_created" if result.get("id") else "app_prompted",
-                                job_id=result.get("id"), status=result.get("status"))
                     self._json(200, {"ok": True, **result})
                 except Exception as exc:  # noqa: BLE001
                     self._json(500, {"ok": False, "error": str(exc)})

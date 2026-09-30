@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "拾流下载器",
-  "version": "2.1.0",
+  "version": "2.1.2",
   "description": "识别网页视频，在播放器旁显示下载按钮，并可接管浏览器下载。",
   "permissions": [
     "contextMenus",
@@ -24,9 +24,16 @@
   ],
   "content_scripts": [
     {
-      "matches": ["http://*/*", "https://*/*"],
-      "js": ["content.js"],
-      "css": ["content.css"],
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "css": [
+        "content.css"
+      ],
       "run_at": "document_idle",
       "all_frames": false
     }

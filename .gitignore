@@ -1,49 +1,39 @@
-# macOS / IDE
-.DS_Store
-.idea/
-.vscode/
-
-# Python
+.venv/
 __pycache__/
 *.py[cod]
 *.egg-info/
 .pytest_cache/
 .mypy_cache/
-.venv/
-venv/
-
-# Local data and downloads
 data/
-channels/
-Downloads/
-04-下载归档/
-*.sqlite
-*.sqlite3
-*.db
-*.db-shm
-*.db-wal
 *.part
-*.mdtmp-*
-settings.json
-jobs.json
-jobs.json.bak
-settings.json.bak
+.idea/
+.vscode/
 
-# Build and diagnostics
+# Build / packaging artifacts
 build/
 dist/
+bin/
+# Chrome-packed extension + its PRIVATE KEY — never publish these
+*.crx
+*.pem
+magic_downloader_*.zip
+magic_downloader_*.xpi
+MagicDownloader-*.zip
+build_log*.txt
 installer/
-node_modules/
+web-ext-artifacts/
+
+# Generated per-browser by build.js / build_extension.py (source of truth: manifests/)
+browser_extension/manifest.json
+
+# 公开快照排除运行数据和未审计二进制
+third_party/
+*.sqlite
+*.sqlite3
+*.log
+outputs/
+channels/
+*.pem
 *.app/
 *.dmg
-*.crx
-*.xpi
-*.pem
-*.log
-build_log*.txt
-web-ext-artifacts/
-.codex/
-outputs/
-
-# Third-party binaries need a separate distribution decision
-third_party/
+*.zip

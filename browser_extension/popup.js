@@ -21,7 +21,7 @@ function send(payload) {
     try {
       const p = B.runtime.sendMessage(payload);
       if (p && typeof p.then === "function") {
-        p.then((res) => resolve(res || { ok: false })).catch((error) => { console.error("[拾流链路] message_failed", String(error.message || error)); resolve({ ok: false }); });
+        p.then((res) => resolve(res || { ok: false })).catch((error) => { resolve({ ok: false }); });
       } else {
         resolve({ ok: false });
       }
@@ -284,7 +284,6 @@ function fmtRow(item, f, name) {
 }
 
 async function doDownload(item, sel, btn, name) {
-  console.info("[拾流链路] button_triggered", { kind: item.kind });
   const old = btn.textContent;
   btn.disabled = true;
   btn.textContent = "…";

@@ -89,8 +89,6 @@ class MagicDownloaderApp(tk.Tk):
 
         self.manager = DownloadManager()
         self.manager.add_listener(self._schedule_refresh)
-        if sys.platform == "darwin":
-            self._log_runtime_paths()
         self._channels = ChannelsService() if sys.platform == "win32" else MacChannelsService() if sys.platform == "darwin" else None
         self._filter = FILTER_ALL
         # None = the order downloads were added, which is what the list showed
@@ -1463,22 +1461,6 @@ class MagicDownloaderApp(tk.Tk):
             with open(DATA_DIR / "error.log", "a", encoding="utf-8") as f:
                 f.write(f"\n[{datetime.datetime.now():%Y-%m-%d %H:%M:%S}]\n")
                 f.write("".join(traceback.format_exception(exc, val, tb)))
-        except Exception:
-            pass
-
-    def _log_runtime_paths(self) -> None:
-        """Record resolved bundle and external-tool paths for Finder launches."""
-        try:
-            from magic_downloader.media.ffmpeg import find_ffmpeg
-            from magic_downloader.media.youtube_browser import find_node
-            from magic_downloader.paths import DATA_DIR, DATA_ROOT, RESOURCE_ROOT
-
-            DATA_DIR.mkdir(parents=True, exist_ok=True)
-            with open(DATA_DIR / "runtime_paths.log", "a", encoding="utf-8") as f:
-                f.write(f"Resources: {RESOURCE_ROOT}\n")
-                f.write(f"Application Support: {DATA_ROOT}\n")
-                f.write(f"Node: {find_node() or 'not found'}\n")
-                f.write(f"ffmpeg: {find_ffmpeg() or 'not found'}\n")
         except Exception:
             pass
 
