@@ -1,0 +1,15 @@
+const assert = require('node:assert/strict');
+const fs = require('node:fs');
+const vm = require('node:vm');
+const code = fs.readFileSync('browser_extension/content.js','utf8');
+const fn = code.slice(code.indexOf('  function instagramItems('),code.indexOf('  function ensureOverlay('));
+const ctx = vm.createContext({URL,location:{pathname:'/',href:'https://www.instagram.com/'}});
+vm.runInContext(fn,ctx);
+const video = (id,text) => ({closest:()=>({innerText:text,querySelectorAll:()=>[{href:`https://www.instagram.com/reel/${id}/`}]})});
+const one = ctx.instagramItems(video('DdfsqgrNH33','coffeevectors\nHey Janice'),{url:'https://s.cdninstagram.com/test.mp4'});
+const two = ctx.instagramItems(video('OtherCode12','another\nDifferent video'),null);
+assert.equal(one.length,1);assert.equal(one[0].kind,'page');
+assert.match(one[0].title,/DdfsqgrNH33/);
+assert.notEqual(one[0].title,two[0].title);
+assert.equal(ctx.instagramItems({closest:()=>null},null).length,0);
+console.log('PASS: Instagram post isolation, complete-post routing and unique names');

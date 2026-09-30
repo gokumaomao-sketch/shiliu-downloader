@@ -1,0 +1,49 @@
+# macOS / IDE
+.DS_Store
+.idea/
+.vscode/
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.venv/
+venv/
+
+# Local data and downloads
+data/
+channels/
+Downloads/
+04-下载归档/
+*.sqlite
+*.sqlite3
+*.db
+*.db-shm
+*.db-wal
+*.part
+*.mdtmp-*
+settings.json
+jobs.json
+jobs.json.bak
+settings.json.bak
+
+# Build and diagnostics
+build/
+dist/
+installer/
+node_modules/
+*.app/
+*.dmg
+*.crx
+*.xpi
+*.pem
+*.log
+build_log*.txt
+web-ext-artifacts/
+.codex/
+outputs/
+
+# Third-party binaries need a separate distribution decision
+third_party/
