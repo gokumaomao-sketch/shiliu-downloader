@@ -19,7 +19,7 @@ File downloads · Web video detection · Browser integration · Local task manag
 
 Shiliu Downloader connects finding content on the web, creating a task, downloading and managing files in a clear local workflow. Local first, a simple interface, and coordination between Chrome and the desktop app are its core principles.
 
-This is **public source**, not a claim of OSI open-source licensing. No root project LICENSE has been selected. Third-party licenses apply to their respective components. No officially signed and notarized V2.1.2 installer is currently available.
+This is **public source**, not a claim of OSI open-source licensing. No root project LICENSE has been selected. Third-party licenses apply to their respective components. V2.1.2 is available as an arm64 Pre-release, with ad-hoc signing only and no Apple notarization.
 
 ## Navigation
 
@@ -50,15 +50,17 @@ A macOS tool for local file downloads, web video detection and desktop task mana
 2. Choose Add task and enter an authorized direct HTTP/HTTPS file URL, filename and destination.
 3. Manage downloads in the desktop app. Chrome and WeChat Channels are optional; ordinary file downloads require neither.
 
-[Releases](https://github.com/gokumaomao-sketch/shiliu-downloader/releases) does not currently offer a public V2.1.2 DMG. Local test packages are not Developer ID signed or notarized.
+[V2.1.2 Pre-release](https://github.com/gokumaomao-sketch/shiliu-downloader/releases/tag/v2.1.2) offers DMG, ZIP, SHA256SUMS.txt and third-party binary provenance. It is a preview, not a stable release.
 
 ## macOS installation
 
-Target: macOS 26.0+, Apple Silicon arm64. The current build was tested on macOS 26.5.2; The bundled Python.framework has an actual minimum OS of 26.0; older macOS compatibility is not claimed. Intel packages are not validated. V2.1.2 binary release remains Draft.
+Target: **macOS 26.0+, Apple Silicon arm64 preview / Pre-release**. Intel packages are not validated.
 
-There is no officially released installer yet. This README does not instruct users to disable Gatekeeper or bypass macOS warnings. Developers may run source or follow [build instructions](docs/构建说明.md).
+Download the DMG or ZIP from [V2.1.2 Pre-release](https://github.com/gokumaomao-sketch/shiliu-downloader/releases/tag/v2.1.2), and verify it against the attached SHA256SUMS.txt. ZIP extraction yields the App; the DMG provides an Applications drag-and-drop entry.
 
-Once a signed public package exists, verify SHA256. ZIP extraction yields an App; a DMG provides an Applications drag-and-drop entry. The optional Chrome extension can be loaded separately when browser integration is needed.
+The App has **ad-hoc signing only**. It has **not received Developer ID Application signing or Apple notarization**. Gatekeeper may block direct launch; local assessment returned rejected. Download availability does not imply Apple verification or warning-free installation. No security-disabling or Gatekeeper bypass instructions are provided.
+
+Chrome integration and WeChat Channels are optional capabilities under continuing validation. Ordinary HTTP/HTTPS downloads do not require either.
 
 ## Running from source
 
@@ -121,7 +123,7 @@ Use [Issues](https://github.com/gokumaomao-sketch/shiliu-downloader/issues) with
 
 ## FAQ
 
-**Where is the V2.1.2 DMG?** No public binary release yet: Developer ID Application and notarization conditions are missing.
+**Where is the V2.1.2 DMG?** It is attached to the public [Pre-release](https://github.com/gokumaomao-sketch/shiliu-downloader/releases/tag/v2.1.2), with no Developer ID signing or Apple notarization.
 
 **Why is the extension disconnected?** Check the app, local 7374 service and optional token. Reload the extension and refresh pages after updating.
 
@@ -168,7 +170,7 @@ See [MAC_BINARY_PROVENANCE.md](MAC_BINARY_PROVENANCE.md) and `third_party_licens
 
 A publication and distribution closure release: product README, public-source audit, third-party compliance and macOS build provenance. Core download behavior remains V2.1.1.
 
-Fresh formal-source extraction, portable paths and branding cleanup; bilingual homepage and private-data-free screenshot; reused QR; official FFmpeg source build. Local arm64 test packages remain subject to the signing and notarization release gate.
+Fresh formal-source extraction, portable paths and branding cleanup; bilingual homepage and private-data-free screenshot; reused QR; official FFmpeg source build. Arm64 DMG/ZIP packages are publicly distributed as a Pre-release, with their signing and notarization limitations disclosed.
 
 ## Version and platform
 

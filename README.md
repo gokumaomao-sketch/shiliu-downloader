@@ -21,7 +21,7 @@
 
 **本地优先 · 界面简洁 · 下载链路清晰 · 浏览器与桌面端协同 · 用户数据尽量留在本机。**
 
-本仓库提供公开源码。拾流下载器自身尚未选择根目录 LICENSE，公开源码不等同于 OSI 开源授权；第三方组件各自遵循原许可证。当前没有正式签名、公证的 V2.1.2 安装包。
+本仓库提供公开源码。拾流下载器自身尚未选择根目录 LICENSE，公开源码不等同于 OSI 开源授权；第三方组件各自遵循原许可证。V2.1.2 现提供 macOS Apple Silicon arm64 可下载预览版（Pre-release），仅有 ad-hoc 签名，未完成 Developer ID 签名与 Apple notarization。
 
 ## 快速导航
 
@@ -48,19 +48,19 @@
 
 ## 快速开始
 
-1. 按下方说明准备 Python 环境，从源码启动桌面端。
+1. 从 [V2.1.2 Pre-release](https://github.com/gokumaomao-sketch/shiliu-downloader/releases/tag/v2.1.2) 下载 DMG 或 ZIP，并先阅读下方签名与安全限制；也可按源码说明运行。
 2. 点击“添加任务”，输入有权访问的普通 HTTP/HTTPS 直接文件链接，确认文件名和保存目录后开始下载。
 3. 在桌面端管理任务；Chrome 扩展和视频号均为可选能力，普通下载不需要安装扩展或配置视频号。
 
-[Releases](https://github.com/gokumaomao-sketch/shiliu-downloader/releases) 当前不提供正式 V2.1.2 DMG 下载；本地测试包未完成 Developer ID 签名与公证。
+[V2.1.2 Pre-release](https://github.com/gokumaomao-sketch/shiliu-downloader/releases/tag/v2.1.2) 提供 arm64 DMG、ZIP、SHA256SUMS.txt 和第三方二进制来源清单。预览版不代表稳定版。
 
 ## macOS 安装方式
 
 当前验证平台：macOS 26.0+、Apple Silicon（arm64）；实际构建环境 macOS 26.5.2。内置 Python.framework 的实际 minos 为 26.0，不能据旧 plist 宣称兼容 macOS 12；Intel 安装包未验证。
 
-V2.1.2 二进制 Release 暂为 Draft。普通用户安装包尚未正式发布，不提供关闭 Gatekeeper 或绕过系统安全提示的操作。开发者可运行源码或按 [构建说明](docs/构建说明.md) 自行构建用于本地验证。
+V2.1.2 二进制现公开为 **Pre-release（预览版）**。App 保持 ad-hoc 签名，**未完成 Developer ID Application 签名与 Apple notarization**。macOS Gatekeeper 可能阻止直接启动；本机评估结果为 rejected，不能保证普通用户可直接运行或无警告安装。下载可用不等于 Apple 已验证。本文不提供关闭安全机制或绕过 Gatekeeper 的操作。
 
-正式安装包发布后应核验 SHA256：ZIP 解压为 App；DMG 挂载后将 App 拖至 Applications。需要浏览器联动时，Chrome 扩展可独立加载；无需安装扩展即可使用普通下载。
+下载后先对照同一 Release 的 `SHA256SUMS.txt` 核验文件。ZIP 解压为 App；DMG 挂载后可将 App 拖至 Applications。需要浏览器联动时，Chrome 扩展可独立加载；无需安装扩展即可使用普通下载。
 
 ## 源码运行
 
@@ -119,7 +119,7 @@ node tests/test_page_player.js
 <img src="assets/readme/qrcode.png" width="220" alt="微信赞赏二维码" />
 </div>
 
-复用此前多模态项目已经公开使用的 [微信赞赏二维码](https://github.com/gokumaomao-sketch/AI-Video-Research-Pipeline/blob/main/docs/support/wechat-appreciation.png)。用途是自愿赞赏，**不是交流群或技术支持入口**。无需付费即可访问源码或下载未来公开发行版本；赞赏不换取软件、功能、服务或许可证。
+复用此前多模态项目已经公开使用的 [微信赞赏二维码](https://github.com/gokumaomao-sketch/AI-Video-Research-Pipeline/blob/main/docs/support/wechat-appreciation.png)。用途是自愿赞赏，**不是交流群或技术支持入口**。无需付费即可访问源码或下载公开预览版；赞赏不换取软件、功能、服务或许可证。
 
 ## GitHub Issues
 
@@ -127,7 +127,7 @@ node tests/test_page_player.js
 
 ## FAQ
 
-**为什么没有 V2.1.2 DMG 下载？** 尚缺有效 Apple Developer ID Application 与公证条件，目前只有公开源码与 Draft Release。
+**V2.1.2 可以下载吗？** 可以，从 [Pre-release](https://github.com/gokumaomao-sketch/shiliu-downloader/releases/tag/v2.1.2) 下载 DMG 或 ZIP。未完成 Developer ID 签名和 Apple 公证，Gatekeeper 可能阻止启动；这不是稳定版。
 
 **扩展为什么连接失败？** 确认桌面端运行、本机 7374 服务正常、扩展 Token 与配置一致；更新后重载扩展并刷新网页。
 
@@ -177,14 +177,16 @@ V2.1.2 为发布与分发收口版本，重点完善 GitHub 首页、公开源�
 - 新鲜提取正式源码、维护可移植路径与品牌清理。
 - 中英产品首页、无隐私演示截图及既有赞赏二维码。
 - 官方 FFmpeg 源码构建、依赖来源与分发边界审计。
-- 本地 arm64 安装包验证；正式二进制发布仍受签名与公证门槛限制。
+- arm64 DMG/ZIP 以公开 Pre-release 分发；保留 ad-hoc 签名并披露未公证状态。
 
 ## 主程序发布核验
 
 2026-09-30：指定 V2.1.2 Release App 独立启动；在监测接收进程身份的条件下，普通 HTTP/HTTPS 文件下载完成且 SHA256 与源文件一致；172 项隔离核心测试通过（下载、任务管理、暂停、删除清理、持久化、默认目录同步）。这些测试不代替全部主窗口操作的人工体验验收。包内 FFmpeg/FFprobe 转封装与媒体检查通过；ZIP 完整性及 DMG 校验通过，二者内 App 与 Release App 逐文件哈希一致。历史任务、配置与自定义路径保留，SQLite 完整性正常。
 
-签名身份检查为 0 个有效身份，App 仅 ad-hoc 签名，Gatekeeper 拒绝；未公证、未 staple，二进制继续保留 Draft/预览状态，不提供安全绕过步骤。内部 Bundle Identifier 仍为 `com.dodo.downloader`，本轮未改包标识；它不是旧数据或源码目录的加载依赖。
+签名身份检查为 0 个有效身份，App 仅 ad-hoc 签名，Gatekeeper 拒绝；未公证、未 staple，二进制以公开 Pre-release 分发，不提供安全绕过步骤。内部 Bundle Identifier 仍为 `com.dodo.downloader`，本轮未改包标识；它不是旧数据或源码目录的加载依赖。
 
 ## 当前版本与平台
 
-**V2.1.2 · macOS · Apple Silicon arm64 · 公开源码**。根目录 LICENSE 未选定；未宣称 Apple 官方认证、已公证或全站支持。
+**V2.1.2 · macOS 26.0+ · Apple Silicon arm64 · 公开预览版 / Pre-release**。根目录 LICENSE 未选定；未宣称 Apple 官方认证、已公证或全站支持。
+
+2026-10-01 预览发布复核：Release App、ZIP、DMG 的 1,609 个文件及符号链接条目一致；指定 Release App 实际 HTTPS 下载完成且与源文件 SHA256 一致；包内 FFmpeg/FFprobe 9.0.2 的 MP4→TS→MP4 转封装和 H.264/AAC 媒体检查通过。历史快照与 v2.1.2 标签未修改。

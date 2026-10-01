@@ -1,32 +1,32 @@
-# 拾流下载器 V2.1.2
+# 拾流下载器 V2.1.2 · macOS arm64 预览版
 
-发布与分发收口版本：完善 GitHub 首页、公开源码审计、第三方依赖合规和 macOS 发布链路。核心下载业务保持 V2.1.1 行为。
+此版本公开为 **Pre-release**，不是正式稳定 Release。免费提供 macOS 26.0+ Apple Silicon arm64 DMG/ZIP；Intel 未验证。复用已核验的 V2.1.2 二进制，本轮没有修改业务代码、历史快照或版本标签。
 
-## 发布状态
+## 签名与安全限制
 
-本版本源码可公开；二进制仅本地测试，Release 保持 Draft。缺 Developer ID Application / notarization 条件，未宣称普通用户可无警告安装。
+App 仅有 **ad-hoc 签名**，未完成 **Developer ID Application 签名与 Apple notarization**，未附带公证票据。macOS Gatekeeper 可能阻止直接启动；本机评估为 rejected。可下载不代表可无警告运行，不宣称 Apple 已验证或已公证，不提供关闭安全机制或绕过 Gatekeeper 的步骤。
 
-## 文件与安装
+## 下载文件
 
-仅面向 macOS 26.0+ Apple Silicon arm64；Intel 未验证。正式签名/公证通过并发布后，ZIP 解压得到 App，DMG 挂载将 App 拖入 Applications。当前这些文件不作为公开安装包提供。
+- `shiliu-downloader-v2.1.2-macOS-arm64.dmg`：挂载后可拖入 Applications。
+- `shiliu-downloader-v2.1.2-macOS-arm64.zip`：解压得到拾流下载器 App。
+- `SHA256SUMS.txt`：对应上述公开附件名称，下载后用于核验 SHA256。
+- `THIRD_PARTY_BINARY_PROVENANCE.md`：第三方来源、版本、许可及二进制哈希。
 
-普通 HTTP/HTTPS 下载可直接从主程序添加任务，无需 Chrome 扩展或视频号配置。Chrome 扩展为可选、持续验证能力，V2.1.2 Release App 真实端到端验收尚未完成；如需使用，加载 App 内 Contents/Resources/browser_extension 或源码同名目录。视频号为可选、持续验证能力，依赖第三方组件与平台权限，不保证当前可用。两者均不阻塞主程序发布；本轮不修改扩展或视频号。
+## 功能与数据
 
-默认数据为 ~/Library/Application Support/拾流下载器；下载目录 ~/Downloads/拾流下载器，自定义路径保留。不要公开个人历史、Cookie、Token 或日志。
+普通 HTTP/HTTPS 文件下载无需 Chrome 扩展或视频号配置。Chrome 扩展与微信视频号是**可选、持续验证能力**，当前真实端到端可用性不作为本次预览发布保证，也不阻塞核心下载发布。页面视频受平台权限、网络、链接有效期与上游变动影响，不绕过 DRM 或登录权限。
 
-## 第三方组件
+默认数据目录 `~/Library/Application Support/拾流下载器`；默认下载目录 `~/Downloads/拾流下载器`，保留用户自定义路径。公开附件不包含个人任务历史、Cookie、Token 或原始用户日志。内部 Bundle Identifier 保留 `com.dodo.downloader`，不依赖旧源码目录。
 
-Node.js 24.21.0（MIT 及组件许可）；FFmpeg/FFprobe 9.0.2（官方源码最低充分 LGPL-2.1+ 构建，随包提供对应源码）；wx_channels_download v260907（MIT + Commons Clause，免费无对价分发，不允许未经授权销售）。完整来源、许可与 SHA256 见 THIRD_PARTY_BINARY_PROVENANCE.md，ZIP/DMG 校验见 SHA256SUMS.txt。
+## 核心复核 · 2026-10-01
 
-## 已知限制
+- Release App、ZIP、DMG 的 1,609 个文件及符号链接条目一致；ZIP 完整性和 DMG 校验通过。
+- 指定 Release App 实际 HTTPS 下载任务 `5d9a9521c372` 完成，15,086 字节，SHA256 与独立获取的源文件一致。
+- 包内 FFmpeg/FFprobe 9.0.2 转封装 MP4→TS→MP4 成功；ffprobe 正常读取 H.264 160×90、AAC、1.044898 秒。
+- ad-hoc 签名完整性核验通过；Gatekeeper rejected，未 staple。
+- 2026-09-30 已核验普通 HTTP/HTTPS、172 项隔离核心测试、历史任务及自定义目录；自动测试不替代全部 UI 的真实体验验收。
 
-无 Developer ID 与公证；站点支持受授权、网络、链接过期和上游解析变动影响；完整测试中已有视觉/模拟多屏/YouTube 配置旧断言，未通过改变业务来绕过。项目自身无根目录 LICENSE，公开源码不等于 OSI 开源。
+## 第三方组件与其他限制
 
-## 本轮主程序核验（2026-09-30）
-
-- 指定 Release App 独立启动，普通 HTTP/HTTPS 下载均由 V2.1.2 进程接收、完成并通过源文件 SHA256 校验。
-- 172 项隔离核心测试通过，覆盖下载、任务管理、暂停、删除清理、持久化与默认目录同步；全部主窗口操作的真实体验验收未完成，不能用自动测试替代。
-- 包内 FFmpeg/FFprobe 9.0.2 转封装及媒体检查正常；ZIP 完整性、DMG 校验通过；两种包内 App 与 Release App 的 1585 个文件哈希一致。
-- 基线历史任务、配置及用户自定义目录保持一致，SQLite integrity_check 为 ok；默认数据与下载路径见上文。
-- 无有效 Developer ID 签名身份；仅 ad-hoc 签名，Gatekeeper rejected，未公证、未 staple。GitHub 二进制 Release 保持 Draft/预览，不绕过系统安全机制。
-- 内部 Bundle Identifier 保留 com.dodo.downloader；它不是旧数据目录或开发源码路径加载依赖，本轮不修改包标识。
+Node.js 24.21.0；FFmpeg/FFprobe 9.0.2 官方源码最低充分 LGPL-2.1+ 构建，随包提供对应源码与构建说明；wx_channels_download v260907（MIT + Commons Clause，仅按现有免费无对价分发边界提供）。详见来源清单。项目自身尚无根目录 LICENSE，公开源码不等于 OSI 开源授权。
